@@ -24,7 +24,7 @@ const RoomsPage = () => {
   const [availabilityError, setAvailabilityError] = useState("Invalid");
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  const [popupType, setPopupType] = useState(""); 
+  const [popupType, setPopupType] = useState("");
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -60,7 +60,9 @@ const RoomsPage = () => {
 
     // dates are not empty
     if (!bookingDetails.arrivalDate || !bookingDetails.departureDate) {
-      setAvailabilityError("Invalid date: room is not Availabile for this date.");
+      setAvailabilityError(
+        "Invalid date: room is not Availabile for this date."
+      );
       setPopupType("error");
       setPopupMessage(availabilityError);
       setShowPopup(true);
@@ -69,7 +71,9 @@ const RoomsPage = () => {
 
     // dates are not in the past
     if (newArrivalDate < currentDate || newDepartureDate < currentDate) {
-      setAvailabilityError("Invalid date: Start date and end date must be in the future.");
+      setAvailabilityError(
+        "Invalid date: Start date and end date must be in the future."
+      );
       setPopupType("error");
       setPopupMessage(availabilityError);
       setShowPopup(true);
@@ -78,14 +82,15 @@ const RoomsPage = () => {
 
     // end date is after the start date
     if (newDepartureDate < newArrivalDate) {
-      setAvailabilityError("Invalid date: End date must be after the start date.");
+      setAvailabilityError(
+        "Invalid date: End date must be after the start date."
+      );
       setPopupType("error");
       setPopupMessage(availabilityError);
       setShowPopup(true);
       return;
     }
 
-    
     // Include userId in bookingDetails
     const bookingData = {
       ...bookingDetails,
@@ -96,10 +101,10 @@ const RoomsPage = () => {
     };
 
     // Store the booking data temporarily in localStorage or state (depending on your needs)
-    localStorage.setItem('bookingData', JSON.stringify(bookingData));
+    localStorage.setItem("bookingData", JSON.stringify(bookingData));
 
     // Redirect to checkout page
-    router.push('/checkout');
+    router.push("/checkout");
   };
 
   if (loading) {
@@ -164,7 +169,7 @@ const RoomsPage = () => {
                         onClick={() => setSelectedRoom(room.id)}
                         className={styles.primarybtn}
                       >
-                        Booking Now
+                        Book Now
                       </Link>
                     </div>
                   </div>
